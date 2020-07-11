@@ -1,5 +1,6 @@
 import os
 import dash
+from nlp_module import *
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.exceptions import PreventUpdate
@@ -25,7 +26,7 @@ app.layout = html.Div([
                 'color': colors['header'],
                 'margin-top': '2em',
             }),
-    ], className= 'app-header'),
+    ], className='app-header'),
     html.Hr(),
     dcc.Textarea(
         id='review-textarea',
@@ -51,7 +52,7 @@ def display_value(n_clicks, value):
     if value == '':
         raise PreventUpdate
     else:
-        return 'You have typed "{}"'.format(value)
+        return 'This is likely a "{}" review'.format(guess_sentiment(value))
 
 if __name__ == '__main__':
     app.run_server(debug=True)
